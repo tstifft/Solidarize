@@ -46,7 +46,7 @@ st.header("Acompanhe em tempo real :bar_chart:")
 
 ""
 ""
-""
+"" 
 col1, col2 = st.columns(2)
 col1.metric(label="Total Arrecadado (kg)", value="70.000")
 col2.metric(label="Total Cestas Básicas", value="5000")
