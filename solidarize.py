@@ -65,14 +65,16 @@ with tab2:
 
     col1,col2 = st.columns(2)
     
-    total_kgs = entradas["Quantidade"].sum()
+    total_kgs = '{0:,}'.format(entradas["Quantidade"].sum()).replace(',','.')
+    
     
     tile1 = col1.container(height=200)
     tile1.markdown(f"<h1 style='text-align: center; color: #028BF9; font-size:70px'>{total_kgs}</h1>", unsafe_allow_html=True)
     tile1.markdown("<h3 style='text-align: right; color: #028BF9;'>Quantidade (Kgs)</h3>", unsafe_allow_html=True)
  
 
-    total_cestas = entradas["Cestas"].sum()
+    total_cestas = '{0:,}'.format(entradas["Cestas"].sum()).replace(',','.')
+
 
     tile2 = col2.container(height=200)
     tile2.markdown(f"<h1 style='text-align: center; color: #028BF9; font-size:70px'>{total_cestas}</h1>", unsafe_allow_html=True)
