@@ -2,8 +2,18 @@ import streamlit as st # type: ignore
 import pandas as pd
 import altair as alt
 
-
 st.set_page_config(layout="wide")
+
+st.markdown("""
+        <style>
+               .block-container {
+                    padding-top: 1rem;
+                    padding-bottom: 0rem;
+                }
+        </style>
+        """, unsafe_allow_html=True)
+
+
 
 
 def nav_button(label, anchor):
@@ -15,7 +25,7 @@ def nav_button(label, anchor):
 
 
 # st.title(':blue[Solidarize]')
-st.markdown(f"<h1 style='text-align: left; color: #028BF9; font-size:80px'>Solidarize</h1>", unsafe_allow_html=True)
+st.markdown(f"<h1 style='text-align: left; color: #028BF9; font-size: 7vmax'>Solidarize</h1>", unsafe_allow_html=True)
     
 
 tab1, tab2, tab3 = st.tabs(["**Saiba mais**", "**Acompanhe**", "**Prioridades**"])
@@ -27,7 +37,7 @@ with tab1:
             
     A campanha **Solidarize** ocorre anualmente e visa arrecadar alimentos e apoiar aqueles que enfrentam dificuldades em nossa comunidade.
      
-    Sua participação é fundamental e fará toda a diferença na vida de muitas famílias.
+    Sua participação fará toda a diferença na vida de muitas famílias.
 
     **Como você pode ajudar:**
 
@@ -47,22 +57,16 @@ with tab1:
             
 
     """)
-    ""
-    ""
-    ""
-    ""
+
 
 with tab2:
 
 ########### DADOS DA CAMPANHA
 
     entradas = pd.read_csv(st.secrets.gsheet.entradas).sort_values(by=['Quantidade'],ascending=False)
-    st.header("Até agora com a sua ajuda já arrecadamos :rocket::rocket::rocket: ...")
+    st.header("Juntos já arrecadamos  ...")
 
     ""
-    ""
-    "" 
-
     col1,col2 = st.columns(2)
     
     total_kgs = '{0:,}'.format(entradas["Quantidade"].sum()).replace(',','.')
@@ -70,6 +74,7 @@ with tab2:
     
     tile1 = col1.container(height=200)
     tile1.markdown(f"<h1 style='text-align: center; color: #028BF9; font-size:70px'>{total_kgs}</h1>", unsafe_allow_html=True)
+    ""
     tile1.markdown("<h3 style='text-align: right; color: #028BF9;'>Quantidade (Kgs)</h3>", unsafe_allow_html=True)
  
 
@@ -89,7 +94,7 @@ with tab2:
              
     #""")
 
-    ""
+    "veja por localidade aqui 	:point_down:"
     ""
     ""
     ""
@@ -118,8 +123,20 @@ with tab3:
 
     ############## ITENS PRIORITARIOS
     st.header("Itens Prioritários")
-    necessidades = pd.read_csv(st.secrets.gsheet.necessidades, index_col="Localidade")
+    necessidades = pd.read_csv(st.secrets.gsheet.necessidades, index_col='Localidade')
 
-    "Esses são os itens prioritários em cada localidade"
+    # "Esses são os itens prioritários em cada localidade"
     ":red[*Isso nos ajuda a termos uma distribuição adqueada para montagem das cestas básicas*]"
-    st.dataframe(necessidades)
+    
+    st.dataframe(necessidades, use_container_width=True)
+    
+    # locais = necessidades['Localidade'].unique()
+    
+    # for local in locais:
+    #     st.write(f"##### {local}")
+    #     df_filter = necessidades[necessidades['Localidade'] == local]
+    #     produtos = df_filter['Produto'].unique()
+    #     for prod in produtos:
+    #         st.write(f' - {prod}')
+    #     ""
+    #     ""
